@@ -1,0 +1,8 @@
+{
+  "name": "piprestaciones",
+  "app_id": "555566b3",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

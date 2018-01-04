@@ -3,16 +3,20 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content>
+  <h2>Welcome to Markdownify!</h2>
+  <ion-item>
+    <ion-label>Convert to Markdown</ion-label>
+    <ion-toggle color="secondary" [(ngModel)]="toggleVal" checked="toggleVal" (ionChange)="convert()"></ion-toggle>
+  </ion-item>
+  <ion-item [hidden]="toggleVal">
+    <ion-textarea rows="6" [(ngModel)]="plainText"  placeholder="Strat writing your markdown below..."></ion-textarea>
+  </ion-item>
+  <ion-content [hidden]="!toggleVal">
+    <div [innerHtml]="content"></div>
+  </ion-content>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
 </ion-content>

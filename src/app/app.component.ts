@@ -3,8 +3,10 @@ import {Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
-import {HomePage} from '../pages/home/home';
+import {MainPage} from '../pages/index.paginas';
 import {SQLite} from "@ionic-native/sqlite";
+import { DbConectProvider} from '../providers/db-conect/db-conect';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -12,15 +14,15 @@ import {SQLite} from "@ionic-native/sqlite";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = MainPage;
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,     public sqlite: SQLite) {
+  constructor(public platform: Platform, public dbConect:DbConectProvider, public statusBar: StatusBar, public splashScreen: SplashScreen,     public sqlite: SQLite) {
     this.initializeApp();
     // used for an example of ngFor and navigation
     this.pages = [
-      {title: 'Home', component: HomePage}
+      {title: 'Main', component: MainPage}
     ];
 
   }
@@ -46,7 +48,12 @@ export class MyApp {
       location: 'default' // the location field is required
     })
       .then((db) => {
-        console.log(db);
+        this.dbConect.setDatabase(db);
+        return this.dbConect.createTable("test");
+      })
+      .then(() =>{
+        this.splashScreen.hide();
+        this.rootPage = 'MainPage';
       })
       .catch(error =>{
         console.error(error);

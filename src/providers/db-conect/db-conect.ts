@@ -38,5 +38,18 @@ export class DbConectProvider {
       .catch(error => Promise.reject(error));
   }
 
+  create(task: any){
+    let sql = 'INSERT INTO tasks(title, completed) VALUES(?,?)';
+    return this.db.executeSql(sql, [task.title, task.completed]);
+  }
 
+  update(task: any){
+    let sql = 'UPDATE tasks SET title=?, completed=? WHERE id=?';
+    return this.db.executeSql(sql, [task.title, task.completed, task.id]);
+  }
+
+  delete(task: any){
+    let sql = 'DELETE FROM tasks WHERE id=?';
+    return this.db.executeSql(sql, [task.id]);
+  }
 }

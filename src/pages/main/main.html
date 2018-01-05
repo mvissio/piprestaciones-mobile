@@ -13,6 +13,14 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+    <ion-item *ngIf="tasks.length == 0">
+      Empty
+    </ion-item>
+      <ion-item *ngFor="let task of tasks; let i = index">
+        <ion-label>{{ task.title }}</ion-label>
+        <ion-checkbox [checked]="task.completed"></ion-checkbox>
+      </ion-item>
+  </ion-list>
 </ion-content>

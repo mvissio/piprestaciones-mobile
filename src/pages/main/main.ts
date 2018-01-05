@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
+import {DbConectProvider} from "../../providers/db-conect/db-conect";
 
 /**
  * Generated class for the MainPage page.
@@ -15,11 +16,29 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MainPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  tasks: any[] = [];
+
+  constructor(public navCtrl: NavController,  private dbConectService:DbConectProvider ) {
+    this.tasks.push({'title':'test', 'completed':true});
+    this.insertData();
+    this.insertData();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MainPage');
+  getAllTasks(){
+    this.dbConectService.getAll()
+      .then(tasks => {
+        this.tasks = tasks;
+      })
+      .catch( error => {
+        console.error( error );
+      });
   }
 
+  insertData(){
+    this.dbConectService.create("test")
+      .catch(error=>{
+          console.error(error);
+          }
+    );
+  }
 }

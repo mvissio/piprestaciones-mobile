@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import {DbConectProvider} from "../../providers/db-conect/db-conect";
+import {MenuOptionsModel} from "../../model/menuOptions.model";
+import {ProgramPage, MapPage, StaticPage} from "../index.paginas";
+import {MainProvider} from "../../providers/main/main";
 
-/**
- * Generated class for the MainPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -17,11 +14,10 @@ import {DbConectProvider} from "../../providers/db-conect/db-conect";
 export class MainPage {
 
   tasks: any[] = [];
+  buttonsArray:MenuOptionsModel[]= [];
 
-  constructor(public navCtrl: NavController,  private dbConectService:DbConectProvider ) {
-    this.tasks.push({'title':'test', 'completed':true});
-    this.insertData();
-    this.insertData();
+  constructor(public navCtrl: NavController, private mainProvider:MainProvider,  private dbConectService:DbConectProvider ) {
+    this.buttonsArray = mainProvider.findButtons();
   }
 
   getAllTasks(){
@@ -41,4 +37,8 @@ export class MainPage {
           }
     );
   }
+
+  changePage(button:MenuOptionsModel){
+    this.navCtrl.push(button.page);
+}
 }

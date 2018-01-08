@@ -6,6 +6,7 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {MainPage} from '../pages/index.paginas';
 import {SQLite} from "@ionic-native/sqlite";
 import { DbConectProvider} from '../providers/db-conect/db-conect';
+import {HomePage} from "../pages/home/home";
 
 
 @Component({
@@ -22,7 +23,8 @@ export class MyApp {
     this.initializeApp();
     // used for an example of ngFor and navigation
     this.pages = [
-      {title: 'Main', component: MainPage}
+      {title: 'Main', component: MainPage},
+      {title: 'Home', component: HomePage}
     ];
 
   }
@@ -31,7 +33,9 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.createDatabase()<
+      if (this.platform.is("cordova")) {
+        this.createDatabase();
+      }
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

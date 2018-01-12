@@ -15,4 +15,10 @@
 
 <ion-content padding>
 
+  <agm-map [latitude]="coords.lat" [longitude]="coords.lng" [zoom]="coords.zoom">
+    <agm-marker [latitude]="coords.lat" [longitude]="coords.lng" ></agm-marker>
+    <agm-info-window>
+      <strong>InfoWindow content</strong>
+    </agm-info-window>
+  </agm-map>
 </ion-content>

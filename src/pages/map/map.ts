@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {MapsProvider} from "../../providers/maps/maps";
+import {CoordsModel} from "../../model/maps/coords.model";
 
 /**
  * Generated class for the MapPage page.
@@ -14,12 +16,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'map.html',
 })
 export class MapPage {
+  coords: CoordsModel;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private mapsProv: MapsProvider) {
+    this.loadMap();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MapPage');
+  loadMap() {
+    this.coords = this.mapsProv.findUbication();
   }
 
 }

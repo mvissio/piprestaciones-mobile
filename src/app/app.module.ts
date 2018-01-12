@@ -14,6 +14,9 @@ import { DbConectProvider } from '../providers/db-conect/db-conect';
 import { MainProvider } from '../providers/main/main';
 import { ProgramProvider } from '../providers/program/program';
 import {PipesModule} from "../pipes/pipes.module";
+import {AgmCoreModule} from "@agm/core";
+import { MapsProvider } from '../providers/maps/maps';
+import {HttpClientModule} from "@angular/common/http";
 @NgModule({
   declarations: [
     MyApp,
@@ -26,6 +29,10 @@ import {PipesModule} from "../pipes/pipes.module";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDYQMf7FFP0S7pdPEl5Vq4uUq3b2gNbJ70'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -45,7 +52,8 @@ import {PipesModule} from "../pipes/pipes.module";
     DbConectProvider,
     MainProvider,
     ProgramProvider,
-    ProgramProvider
+    ProgramProvider,
+    MapsProvider
   ]
 })
 export class AppModule {}

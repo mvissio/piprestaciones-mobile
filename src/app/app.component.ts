@@ -7,6 +7,7 @@ import {MainPage} from '../pages/index.paginas';
 import {SQLite} from "@ionic-native/sqlite";
 import { DbConectProvider} from '../providers/db-conect/db-conect';
 import {HomePage} from "../pages/home/home";
+import {MainProvider} from "../providers/main/main";
 
 
 @Component({
@@ -19,13 +20,14 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public dbConect:DbConectProvider, public statusBar: StatusBar, public splashScreen: SplashScreen,     public sqlite: SQLite) {
+  constructor(public platform: Platform, public mainProv: MainProvider, public dbConect:DbConectProvider, public statusBar: StatusBar, public splashScreen: SplashScreen,     public sqlite: SQLite) {
     this.initializeApp();
     // used for an example of ngFor and navigation
     this.pages = [
       {title: 'Main', component: MainPage},
       {title: 'Home', component: HomePage}
     ];
+    // mainProv.conectForMenus();
 
   }
 

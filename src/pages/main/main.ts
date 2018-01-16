@@ -2,8 +2,9 @@ import {Component} from '@angular/core';
 import {IonicPage, NavController} from 'ionic-angular';
 import {DbConectProvider} from "../../providers/db-conect/db-conect";
 import {MenuOptionsModel} from "../../model/menuOptions.model";
-import {ProgramPage, MapPage, StaticPage} from "../index.paginas";
+import {AgendaPage,ProgramPage, MapPage, StaticPage} from "../index.paginas";
 import {MainProvider} from "../../providers/main/main";
+import {Page} from "ionic-angular/umd/navigation/nav-util";
 
 
 @IonicPage()
@@ -13,12 +14,10 @@ import {MainProvider} from "../../providers/main/main";
 })
 export class MainPage {
 
-  buttonsArray: MenuOptionsModel[] = [];
 
   constructor(public navCtrl: NavController, private mainProvider: MainProvider, private dbConectService: DbConectProvider) {
-    this.buttonsArray = mainProvider.findButtons();
   }
-  
+
   insertData() {
     this.dbConectService.create("test")
       .catch(error => {
@@ -27,7 +26,22 @@ export class MainPage {
       );
   }
 
-  changePage(button: MenuOptionsModel) {
-    this.navCtrl.push(button.page);
+  changePage(type: string) {
+    let pageSelect: Page;
+    switch (type) {
+      case "programa":
+        pageSelect= ProgramPage;
+        break;
+      case "maps":
+        pageSelect= MapPage;
+        break;
+      case "agenda":
+        pageSelect= AgendaPage;
+        break;
+      default:
+        pageSelect= StaticPage;
+        break;
+    }
+    this.navCtrl.push(pageSelect);
   }
 }

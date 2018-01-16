@@ -1,20 +1,37 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Programa</ion-title>
+    <ion-title [style.color]="randomcolor"
+               [style.background-color]="randomcolor">
+      Programa
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="list-avatar-page">
-  <ion-list *ngFor="let programArea of programAreaList">
-    <ion-list-header [innerHtml]="programArea.title" > </ion-list-header>
+  <div [ngStyle]="{'color': color, 'font-family': family, 'font-size': size + 'px'}"></div>
 
-    {{programArea.title}}
+  <ion-list *ngFor="let programArea of programAreaList">
+    <ion-list-header [innerHtml]="programArea.title"   > </ion-list-header>
     <ion-item *ngFor="let programDate of programArea.programaDateList" (click)="pushProgram(programDate)">
       <ion-avatar *ngIf="programDate.imageSrc" item-start>
         <img src="{{programDate.imageSrc}}">
       </ion-avatar>
-      <h2 [innerHtml]="programDate.title"></h2>
+      <h2 [innerHtml]="programDate.title" [style.border]="'1px'" [style.color]="randomcolor" [style.background-color]="randomcolor"></h2>
       <!--<ion-note item-end>3:43 pm</ion-note>-->
     </ion-item>
   </ion-list>
+
+
+  <h1 [style.font-family]="fontfami">
+    Holaaaaaaaaaaaaaaaaaaa
+  </h1>
+  <!---style binding for colors -->
+  <h2>Style Binding using 'style.color' directive</h2>
+  <!--call the random color property to set the color of this div -->
+  <div [style.color]="randomcolor" [style.background-color]="randomcolor"> I would be styled with different colors dynamically </div>
+  <!--attach a click function to this button to set the color dynamically -->
+  <button (click)="setColor()"> Set my color </button>
+
+
+
 </ion-content>

@@ -18,7 +18,8 @@ import marked from 'marked';
 })
 export class ProgramPage {
   @ViewChild(Content) content: Content;
-
+  colorText:string="#f2f2f2";
+  selectedFont:string;
   programAreaList:ProgramAreaModel[]=[];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     let program:ProgramAreaModel= new ProgramAreaModel();
@@ -36,5 +37,24 @@ export class ProgramPage {
   pushProgram(programDate){
     console.log(programDate);
     this.navCtrl.push(ProgramPage);
+  }
+
+
+
+
+  randomcolor = this.getRandomColor();
+
+  //function to get random colors
+  public getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++){
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  setColor() {
+    this.randomcolor = this.getRandomColor();
   }
 }

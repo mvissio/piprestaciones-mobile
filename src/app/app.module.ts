@@ -1,22 +1,25 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import {BrowserModule} from '@angular/platform-browser';
+import {ErrorHandler, NgModule} from '@angular/core';
+import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 
-import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import {MapPage,StaticPage,MainPage,ProgramPage} from '../pages/index.paginas';
+import {MyApp} from './app.component';
+import {HomePage} from '../pages/home/home';
+import {MapPage, AgendaPage, StaticPage, MainPage, ProgramPage} from '../pages/index.paginas';
 
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { PrincipalProvider } from '../providers/principal/principal';
+import {StatusBar} from '@ionic-native/status-bar';
+import {SplashScreen} from '@ionic-native/splash-screen';
+import {PrincipalProvider} from '../providers/principal/principal';
 import {SQLite} from "@ionic-native/sqlite";
-import { DbConectProvider } from '../providers/db-conect/db-conect';
-import { MainProvider } from '../providers/main/main';
-import { ProgramProvider } from '../providers/program/program';
+import {DbConectProvider} from '../providers/db-conect/db-conect';
+import {MainProvider} from '../providers/main/main';
+import {ProgramProvider} from '../providers/program/program';
 import {PipesModule} from "../pipes/pipes.module";
 import {AgmCoreModule} from "@agm/core";
-import { MapsProvider } from '../providers/maps/maps';
+import {MapsProvider} from '../providers/maps/maps';
 import {HttpClientModule} from "@angular/common/http";
+import {StaticProvider} from '../providers/static/static';
+import {Http} from "@angular/http";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -24,12 +27,14 @@ import {HttpClientModule} from "@angular/common/http";
     MainPage,
     ProgramPage,
     MapPage,
-    StaticPage
+    StaticPage,
+    AgendaPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
+    // Http,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDYQMf7FFP0S7pdPEl5Vq4uUq3b2gNbJ70'
     })
@@ -41,7 +46,8 @@ import {HttpClientModule} from "@angular/common/http";
     MainPage,
     ProgramPage,
     MapPage,
-    StaticPage
+    StaticPage,
+    AgendaPage
   ],
   providers: [
     StatusBar,
@@ -53,7 +59,9 @@ import {HttpClientModule} from "@angular/common/http";
     MainProvider,
     ProgramProvider,
     ProgramProvider,
-    MapsProvider
+    MapsProvider,
+    StaticProvider
   ]
 })
-export class AppModule {}
+export class AppModule {
+}

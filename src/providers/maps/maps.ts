@@ -33,7 +33,9 @@ export class MapsProvider {
   }
 
   private conectForUbication(){
-      return this.http.get('https://randomuser.me/api/?results=2');
+    let resp = this.http.get('http://localhost:3977/maps');
+    console.log(resp);
+    return resp;
   }
 
 }

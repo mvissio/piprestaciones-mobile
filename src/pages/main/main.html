@@ -10,9 +10,9 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <button text-center ion-button block *ngFor="let button of buttonsArray; let i = index" (click)="changePage(button)" >
-        <ion-icon icon-right name="{{button.icon}}">
-          {{button.titleMenu}}
+      <button text-center ion-button block *ngFor="let button of mainProvider.buttonList; let i = index" (click)="changePage(button.Type)" >
+        <ion-icon icon-right name="{{button.Icon}}">
+          {{button.TitleMenu}}
         </ion-icon>
       </button>
     </ion-item>

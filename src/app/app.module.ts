@@ -10,7 +10,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {PrincipalProvider} from '../providers/principal/principal';
 import {SQLite} from "@ionic-native/sqlite";
-import {DbConectProvider} from '../providers/db-conect/db-conect';
+import {DbConnectProvider} from '../providers/db-conect/db-connect.provider';
 import {MainProvider} from '../providers/main/main';
 import {ProgramProvider} from '../providers/program/program';
 import {PipesModule} from "../pipes/pipes.module";
@@ -18,7 +18,6 @@ import {AgmCoreModule} from "@agm/core";
 import {MapsProvider} from '../providers/maps/maps';
 import {HttpClientModule} from "@angular/common/http";
 import {StaticProvider} from '../providers/static/static';
-import {Http} from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -34,7 +33,6 @@ import {Http} from "@angular/http";
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    // Http,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDYQMf7FFP0S7pdPEl5Vq4uUq3b2gNbJ70'
     })
@@ -55,7 +53,7 @@ import {Http} from "@angular/http";
     SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PrincipalProvider,
-    DbConectProvider,
+    DbConnectProvider,
     MainProvider,
     ProgramProvider,
     ProgramProvider,

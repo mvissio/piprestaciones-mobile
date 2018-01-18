@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {MenuOptionsModel} from "../../model/menuOptions.model";
-import {StaticPage, ProgramPage, MapPage} from "../../pages/index.paginas";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {URL_PROVIDERS} from "../../config/urlProviders.config";
+import {RespondButtonsRestInterface} from '../../interface/index.interface';
+import {TableCssMainProvider} from "../db-conect/db-tables/db-index.provider";
 
 @Injectable()
 export class MainProvider {
@@ -16,8 +16,10 @@ export class MainProvider {
 
   public conectForMenus() {
     let url: string = this.baseUrlMain + '/GetMenu';
-    this.http.get<respondButtons[]>(url)
+    // let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    this.http.get<[RespondButtonsRestInterface]>(url)
       .subscribe((dataList) => {
+        console.log(dataList);
           dataList.forEach(
             (data) => this.buttonList.push(data)
           )
@@ -28,38 +30,7 @@ export class MainProvider {
       );
   }
 
-}
+  public findFromDb(){
 
-export interface respondButtons {
-  id?: string;
-  titleMenu: string;
-  status: boolean;
-  type: string;
-  order: number;
-  icon?: string;
-
-
-}
-
-
-export interface respondButtonsRest {
-  MenuId?: string;
-  TitleMenu: string;
-  Status: boolean;
-  Type: string;
-  Order: number;
-  Icon?: string;
-  CssModelMenu: cssResponse;
-
-}
-
-
-export class cssResponse {
-  BorderSize?: number;
-  ColorBack: string;
-  ColorText: string;
-  FontFamily: string;
-
-  constructor() {
   }
 }

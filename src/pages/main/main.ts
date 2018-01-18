@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController} from 'ionic-angular';
-import {DbConectProvider} from "../../providers/db-conect/db-conect";
+import {DbConnectProvider} from "../../providers/db-conect/db-connect.provider";
 import {MenuOptionsModel} from "../../model/menuOptions.model";
 import {AgendaPage,ProgramPage, MapPage, StaticPage} from "../index.paginas";
 import {MainProvider} from "../../providers/main/main";
@@ -15,7 +15,7 @@ import {Page} from "ionic-angular/umd/navigation/nav-util";
 export class MainPage {
 
 
-  constructor(public navCtrl: NavController, private mainProvider: MainProvider, private dbConectService: DbConectProvider) {
+  constructor(public navCtrl: NavController, private mainProvider: MainProvider, private dbConectService: DbConnectProvider) {
   }
 
   insertData() {

@@ -1,23 +1,32 @@
 import { Injectable } from '@angular/core';
 import {SQLiteObject} from "@ionic-native/sqlite";
+import { TableCssMainProvider, TableButtonMenuProvider} from './db-tables/db-index.provider';
 
 
 @Injectable()
-export class DbConectProvider {
+export class DbConnectProvider {
   db: SQLiteObject = null;
 
-  constructor() {}
-
-  createTable(sql:string){
-    sql = 'CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, completed INTEGER)';
-    return this.db.executeSql(sql, []);
+  constructor(public tableCssMainProv:TableCssMainProvider,
+              public tableMenuButtonProv:TableButtonMenuProvider) {
   }
 
-  setDatabase(db: SQLiteObject){
+  public setDatabase(db: SQLiteObject){
     if(this.db === null){
       this.db = db;
     }
   }
+
+  public createTables(){
+    this.tableCssMainProv.createTableCssMenu();
+    this.tableMenuButtonProv.createTableMenuButton();
+  }
+
+  public getDB(){
+    return this.db;
+  }
+
+
 
   getAll(){
     let sql = 'SELECT * FROM tasks';

@@ -1,4 +1,4 @@
-export {DbConectProvider} from "./db-conect/db-conect";
+export {DbConnectProvider} from "./db-conect/db-connect.provider";
 export {StaticProvider} from "./static/static";
 export {ProgramProvider} from "./program/program";
 export {MainProvider} from "./main/main";

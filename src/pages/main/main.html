@@ -10,8 +10,13 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <button text-center ion-button block *ngFor="let button of mainProvider.buttonList; let i = index" (click)="changePage(button.Type)" >
-        <ion-icon icon-right name="{{button.Icon}}">
+      <button text-center ion-button block *ngFor="let button of mainProvider.buttonList; let i = index"
+              (click)="changePage(button.Type)"
+              [style.backgroundImage]="'url('+button.CssModelMenu.ImageBack+')'"
+              [style.backgroundColor]="button.CssModelMenu.ColorBack"
+              [style.color]="button.CssModelMenu.ColorText"
+              [style.border]="button.CssModelMenu.BorderSize+'px solid #7480a2'">
+        <ion-icon icon-right name="{{button.Icon}}" >
           {{button.TitleMenu}}
         </ion-icon>
       </button>

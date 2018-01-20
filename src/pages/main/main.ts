@@ -15,15 +15,10 @@ import {Page} from "ionic-angular/umd/navigation/nav-util";
 export class MainPage {
 
 
-  constructor(public navCtrl: NavController, private mainProvider: MainProvider, private dbConectService: DbConnectProvider) {
-  }
 
-  insertData() {
-    this.dbConectService.create("test")
-      .catch(error => {
-          console.error(error);
-        }
-      );
+  constructor(public navCtrl: NavController, private mainProvider: MainProvider, private dbConectService: DbConnectProvider) {
+    mainProvider.conectForMenus(); 
+
   }
 
   changePage(type: string) {

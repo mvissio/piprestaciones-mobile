@@ -21,10 +21,8 @@ export class MyApp {
   pages: Array<{ title: string, component: any }>;
 
   constructor(public platform: Platform,
-              public dbConect:DbConnectProvider,
               public statusBar: StatusBar,
-              public splashScreen: SplashScreen,
-              public sqlite: SQLite) {
+              public splashScreen: SplashScreen) {
     this.initializeApp();
     this.pages = [
       {title: 'Main', component: MainPage},
@@ -35,11 +33,6 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      if (this.platform.is("cordova")) {
-        this.createDatabase();
-      }else{
-        console.log("Sin cordova");
-      }
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -47,23 +40,5 @@ export class MyApp {
 
   openPage(page) {
     this.nav.setRoot(page.component);
-  }
-  private createDatabase(){
-    this.sqlite.create({
-      name: 'data.db',
-      location: 'default' // the location field is required
-    })
-      .then((db) => {
-        this.dbConect.setDatabase(db);
-        this.dbConect.createTables();
-        console.log("Tablas Creadas");
-      })
-      .then(() =>{
-        this.splashScreen.hide();
-        this.rootPage = 'MainPage';
-      })
-      .catch(error =>{
-        console.error(error);
-      });
   }
 }

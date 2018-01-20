@@ -18,6 +18,7 @@ import {AgmCoreModule} from "@agm/core";
 import {MapsProvider} from '../providers/maps/maps';
 import {HttpClientModule} from "@angular/common/http";
 import {StaticProvider} from '../providers/static/static';
+import {TableButtonMenuProvider,TableCssMainProvider} from "../providers/db-conect/db-tables/db-index.provider";
 
 @NgModule({
   declarations: [
@@ -54,6 +55,8 @@ import {StaticProvider} from '../providers/static/static';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PrincipalProvider,
     DbConnectProvider,
+    TableCssMainProvider,
+    TableButtonMenuProvider,
     MainProvider,
     ProgramProvider,
     ProgramProvider,

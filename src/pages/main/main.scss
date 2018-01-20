@@ -1,3 +1,11 @@
 page-main {
-
+  button{
+    background-repeat:no-repeat;
+    height: 30vh;
+  }
+  .item-md .item-button{
+    height: 10vh !important;
+    margin-top: 2vh !important;
+    //border: black;
+  }
 }

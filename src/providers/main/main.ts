@@ -9,7 +9,6 @@ export class MainProvider {
   baseUrlMain: string = URL_PROVIDERS + '/Menus';
 
   constructor(private http: HttpClient) {
-    this.conectForMenus();
   }
 
   buttonList: any[] = [];
@@ -19,18 +18,15 @@ export class MainProvider {
     // let headers = new HttpHeaders().set('Content-Type', 'application/json');
     this.http.get<[RespondButtonsRestInterface]>(url)
       .subscribe((dataList) => {
-        console.log(dataList);
           dataList.forEach(
-            (data) => this.buttonList.push(data)
+            (data) => {
+              this.buttonList.push(data);
+            }
           )
         },
         (error) => {
           return error;
         }
       );
-  }
-
-  public findFromDb(){
-
   }
 }

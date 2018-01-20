@@ -14,16 +14,6 @@ import {StaticProvider} from "../../providers/static/static";
 @IonicPage()
 @Component({
   selector: 'page-static',
-  styles: [
-      `
-      :host(h1) {
-        background-color: red;
-        border: 1px solid black;
-        color: white;
-        display: block;
-      }
-    `
-  ],
   templateUrl: 'static.html'
 })
 export class StaticPage {

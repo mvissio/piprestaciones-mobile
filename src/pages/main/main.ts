@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController} from 'ionic-angular';
+import {IonicPage, NavController, Platform} from 'ionic-angular';
 import {DbConnectProvider} from "../../providers/db-conect/db-connect.provider";
 import {MenuOptionsModel} from "../../model/menuOptions.model";
-import {AgendaPage,ProgramPage, MapPage, StaticPage} from "../index.paginas";
+import {AgendaPage, ProgramPage, MapPage, StaticPage} from "../index.paginas";
 import {MainProvider} from "../../providers/main/main";
 import {Page} from "ionic-angular/umd/navigation/nav-util";
 
@@ -15,9 +15,17 @@ import {Page} from "ionic-angular/umd/navigation/nav-util";
 export class MainPage {
 
 
+  constructor(private platform: Platform,
+              public navCtrl: NavController,
+              public mainProvider: MainProvider,
+              public dbConectService: DbConnectProvider) {
 
-  constructor(public navCtrl: NavController, private mainProvider: MainProvider, private dbConectService: DbConnectProvider) {
-    mainProvider.conectForMenus(); 
+    Promise.resolve(mainProvider.conectForMenus()).then((data)=>{
+     console.log(data);
+    }).catch((error)=>{
+      console.log(error);
+    });
+
 
   }
 
@@ -25,16 +33,16 @@ export class MainPage {
     let pageSelect: Page;
     switch (type) {
       case "programa":
-        pageSelect= ProgramPage;
+        pageSelect = ProgramPage;
         break;
       case "maps":
-        pageSelect= MapPage;
+        pageSelect = MapPage;
         break;
       case "agenda":
-        pageSelect= AgendaPage;
+        pageSelect = AgendaPage;
         break;
       default:
-        pageSelect= StaticPage;
+        pageSelect = StaticPage;
         break;
     }
     this.navCtrl.push(pageSelect);

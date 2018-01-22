@@ -2,18 +2,24 @@ import {Injectable} from '@angular/core';
 import {DbConnectProvider} from "../../db-connect.provider";
 import {CssResponseInterface} from "../../../../interface/main/cssResponse.interface";
 import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
+import {RespondButtonsRestInterface} from "../../../../interface/index.interface";
 
 
 @Injectable()
-export class TableCssMainProvider {
+export class TableCssMainProvider extends DbConnectProvider{
   nameTable: string = "cssMenu";
-  dbCss: SQLiteObject = null;
+  sqlInsertCssmain: string = `INSERT INTO
+                            cssMenu(idCssMenu, borderSizeCssMenu, colorBackCssMenu, colorTextCssMenu, fontFamilyCssMenu, imageBackCssMenu)
+                            VALUES(?,?,?,?,?,?)`;
+  sqlCreateCssmain: string = `CREATE TABLE IF NOT EXISTS
+                            cssMenu(idCssMenu INTEGER PRIMARY KEY,
+                            borderSizeCssMenu TEXT,
+                            colorBackCssMenu TEXT NOT NULL,
+                            colorTextCssMenu TEXT NOT NULL,
+                            fontFamilyCssMenu TEXT NOT NULL,
+                            imageBackCssMenu TEXT NOT NULL);`;
 
-  constructor() {
-  }
-
-  public createTableCssMenu(db: SQLiteObject) {
-    this.dbCss = db;
+  public createTableCssMenu() {
     return new Promise((resolve, reject) => {
       let sql: string = `CREATE TABLE IF NOT EXISTS ` + this.nameTable + `(
                      idCssMenu INTEGER PRIMARY KEY,
@@ -22,9 +28,11 @@ export class TableCssMainProvider {
                      colorTextCssMenu TEXT NOT NULL,
                      fontFamilyCssMenu TEXT NOT NULL,
                      imageBackCssMenu TEXT NOT NULL);`;
+      console.log("createTableCssMenu sql");
 
-      this.dbCss.executeSql(sql, [])
+      this.db.executeSql(sql, [])
         .then((data) => {
+          console.log("createTableCssMenu data");
           resolve(data);
         }, (error) => {
           reject(error);
@@ -33,11 +41,16 @@ export class TableCssMainProvider {
   }
 
   insertCssMain(cssMain: CssResponseInterface) {
-    let sql = `INSERT INTO ` + this.nameTable + ` 
-               (idCssMenu, borderSizeCssMenu, colorBackCssMenu, colorTextCssMenu, fontFamilyCssMenu, imageBackCssMenu)
-               VALUES(?,?,?,?,?,?)`;
     return new Promise((resolve, reject) => {
-      this.dbCss.executeSql(sql, [cssMain.BorderSize, cssMain.ColorBack, cssMain.ColorText, cssMain.FontFamily, cssMain.ImageBack, cssMain.CssMenuId])
+      console.log("insertando");
+
+      this.db.executeSql(this.sqlInsertCssmain,
+        [cssMain.CssMenuId,
+          cssMain.BorderSize,
+          cssMain.ColorBack,
+          cssMain.ColorText,
+          cssMain.FontFamily,
+          cssMain.ImageBack])
         .then((data) => {
           resolve(data);
         }, (error) => {
@@ -46,12 +59,12 @@ export class TableCssMainProvider {
     });
   }
 
-  updateCssMain(cssMain: CssResponseInterface) {
+  updateCssMain(db: SQLiteObject, cssMain: CssResponseInterface) {
     return new Promise((resolve, reject) => {
       let sql = `UPDATE ` + this.nameTable + ` 
                SET borderSizeCssMenu=?, colorBackCssMenu=?, colorTextCssMenu=?,fontFamilyCssMenu=?, imageBackCssMenu=?
                WHERE idCssMenu=?`;
-      this.dbCss
+      db
         .executeSql(sql, [cssMain.BorderSize, cssMain.ColorBack, cssMain.ColorText, cssMain.FontFamily, cssMain.ImageBack, cssMain.CssMenuId])
         .then((data) => {
           resolve(data);
@@ -64,22 +77,22 @@ export class TableCssMainProvider {
   getAllCssButtons() {
     let sql = ` SELECT * 
                 FROM ` + this.nameTable;
-    return this.dbCss.executeSql(sql, [])
+    return this.db.executeSql(sql, [])
       .then(response => {
-        let listButton = [];
+        let listButton: RespondButtonsRestInterface[] = [];
         for (let index = 0; index < response.rows.length; index++) {
           listButton.push(response.rows.item(index));
+          console.log("insertado");
         }
         return Promise.resolve(listButton);
-      })
-      .catch(error => Promise.reject(error));
+      });
   }
 
   getCSsButtonById(cssButtonId: number) {
     let sql = ` SELECT * 
                 FROM ` + this.nameTable +
       ` WHERE idCssMenu=?`;
-    return this.dbCss.executeSql(sql, [cssButtonId])
+    return this.db.executeSql(sql, [cssButtonId])
       .then(response => {
         let listButton = [];
         for (let index = 0; index < response.rows.length; index++) {

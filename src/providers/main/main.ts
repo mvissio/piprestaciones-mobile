@@ -11,8 +11,8 @@ export class MainProvider {
   baseUrlMain: string = URL_PROVIDERS + '/Menus';
 
   constructor(private http: HttpClient,
-              private platform:Platform,
-              private dbConectService:DbConnectProvider) {
+              private platform: Platform,
+              private dbConectService: DbConnectProvider) {
   }
 
   buttonList: RespondButtonsRestInterface[] = [];
@@ -25,7 +25,9 @@ export class MainProvider {
           dataList.forEach(
             (data) => {
               this.buttonList.push(data);
-              this.insertData(data);
+              if (this.platform.is("cordova")) {
+                this.insertData(data);
+              }
             }
           );
           console.log(dataList);
@@ -38,22 +40,23 @@ export class MainProvider {
       );
   }
 
-  public insertData(data:RespondButtonsRestInterface){
-    console.log("------------ " +data);
-    if (this.platform.is("cordova")) {
-        console.log("Datos insertando: " + data)
-        this.dbConectService.tableMenuButtonProv.insertMenuButton(data);
-        console.log("Datos 1 insertado");
-        this.dbConectService.tableCssMainProv.insertCssMain(data.CssModelMenu);
-        console.log("Datos Insertados: " + data)
-      }
-      // dbConectService.tableCssMainProv.getCSsButtonById(mainProvider.buttonList[1].CssModelMenu.CssMenuId).then((data) => {
+  public insertData(data: RespondButtonsRestInterface) {
+    console.log("Datos insertando: " + data);
+    this.dbConectService.insertMenuButton(data);
+    console.log("Datos insertando: " + data);
 
-      //   dbConectService.createTables().then((data)=>{
-      //     console.log("createTables finish");
-      //     // this.dbConectService.insertCssMenu(mainProvider.buttonList[1].CssModelMenu);
-      //   }).catch((error)=>{
-      //     console.log("createTables error")
-      //   });
-    }
+    this.dbConectService.getAllMenuButtons();
+    // console.log("Datos 1 insertado");
+    // // this.dbConectService.tableCssMainProv.insertCssMain(data.CssModelMenu);
+    // console.log("Datos Insertados: " + data)
+  }
+
+  // dbConectService.tableCssMainProv.getCSsButtonById(mainProvider.buttonList[1].CssModelMenu.CssMenuId).then((data) => {
+
+  //   dbConectService.createTables().then((data)=>{
+  //     console.log("createTables finish");
+  //     // this.dbConectService.insertCssMenu(mainProvider.buttonList[1].CssModelMenu);
+  //   }).catch((error)=>{
+  //     console.log("createTables error")
+  //   });
 }

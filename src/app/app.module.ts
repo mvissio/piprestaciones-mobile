@@ -13,7 +13,6 @@ import {SQLite} from "@ionic-native/sqlite";
 import {DbConnectProvider} from '../providers/db-conect/db-connect.provider';
 import {MainProvider} from '../providers/main/main';
 import {ProgramProvider} from '../providers/program/program';
-import {PipesModule} from "../pipes/pipes.module";
 import {AgmCoreModule} from "@agm/core";
 import {MapsProvider} from '../providers/maps/maps';
 import {HttpClientModule} from "@angular/common/http";

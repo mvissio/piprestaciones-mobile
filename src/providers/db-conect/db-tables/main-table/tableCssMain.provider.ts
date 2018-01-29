@@ -6,7 +6,7 @@ import {RespondButtonsRestInterface} from "../../../../interface/index.interface
 
 
 @Injectable()
-export class TableCssMainProvider extends DbConnectProvider{
+export class TableCssMainProvider{
   nameTable: string = "cssMenu";
   sqlInsertCssmain: string = `INSERT INTO
                             cssMenu(idCssMenu, borderSizeCssMenu, colorBackCssMenu, colorTextCssMenu, fontFamilyCssMenu, imageBackCssMenu)
@@ -19,7 +19,7 @@ export class TableCssMainProvider extends DbConnectProvider{
                             fontFamilyCssMenu TEXT NOT NULL,
                             imageBackCssMenu TEXT NOT NULL);`;
 
-  public createTableCssMenu() {
+  public createTableCssMenu(db:SQLiteObject) {
     return new Promise((resolve, reject) => {
       let sql: string = `CREATE TABLE IF NOT EXISTS ` + this.nameTable + `(
                      idCssMenu INTEGER PRIMARY KEY,
@@ -28,11 +28,9 @@ export class TableCssMainProvider extends DbConnectProvider{
                      colorTextCssMenu TEXT NOT NULL,
                      fontFamilyCssMenu TEXT NOT NULL,
                      imageBackCssMenu TEXT NOT NULL);`;
-      console.log("createTableCssMenu sql");
 
-      this.db.executeSql(sql, [])
+      db.executeSql(sql, [])
         .then((data) => {
-          console.log("createTableCssMenu data");
           resolve(data);
         }, (error) => {
           reject(error);
@@ -40,11 +38,10 @@ export class TableCssMainProvider extends DbConnectProvider{
     });
   }
 
-  insertCssMain(cssMain: CssResponseInterface) {
+  insertCssMain(db:SQLiteObject,cssMain: CssResponseInterface) {
     return new Promise((resolve, reject) => {
       console.log("insertando");
-
-      this.db.executeSql(this.sqlInsertCssmain,
+      db.executeSql(this.sqlInsertCssmain,
         [cssMain.CssMenuId,
           cssMain.BorderSize,
           cssMain.ColorBack,
@@ -74,10 +71,10 @@ export class TableCssMainProvider extends DbConnectProvider{
     });
   }
 
-  getAllCssButtons() {
+  getAllCssButtons(db:SQLiteObject) {
     let sql = ` SELECT * 
                 FROM ` + this.nameTable;
-    return this.db.executeSql(sql, [])
+    return db.executeSql(sql, [])
       .then(response => {
         let listButton: RespondButtonsRestInterface[] = [];
         for (let index = 0; index < response.rows.length; index++) {
@@ -88,11 +85,11 @@ export class TableCssMainProvider extends DbConnectProvider{
       });
   }
 
-  getCSsButtonById(cssButtonId: number) {
+  getCSsButtonById(db:SQLiteObject,cssButtonId: number) {
     let sql = ` SELECT * 
                 FROM ` + this.nameTable +
       ` WHERE idCssMenu=?`;
-    return this.db.executeSql(sql, [cssButtonId])
+    return db.executeSql(sql, [cssButtonId])
       .then(response => {
         let listButton = [];
         for (let index = 0; index < response.rows.length; index++) {

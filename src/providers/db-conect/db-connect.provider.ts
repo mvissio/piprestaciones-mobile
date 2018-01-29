@@ -3,12 +3,13 @@ import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
 import {TableCssMainProvider, TableButtonMenuProvider} from './db-tables/db-index.provider';
 import {Platform} from "ionic-angular";
 import {CssResponseInterface} from "../../interface/main/cssResponse.interface";
+import {RespondButtonsRestInterface} from "../../interface/main/respondButtonsRest.interface";
 
 
 @Injectable()
 export class DbConnectProvider {
-  db: SQLiteObject = null;
-  isOpen: boolean=false;
+  db: SQLiteObject;
+  isOpen: boolean = false;
 
   constructor(public storage: SQLite,
               public platform: Platform,
@@ -26,17 +27,32 @@ export class DbConnectProvider {
       }).catch((error) => {
         console.log("ERROR CREATE TABLE:" + error)
       });
-    }else{
+    } else {
       console.log("No Problem");
     }
   }
 
   public createTables() {
-      return Promise.all([/*this.tableMenuButtonProv.createTableMenuButton(this.db),
-                                 */this.tableCssMainProv.createTableCssMenu()]);
+    return Promise.all([this.tableMenuButtonProv.createTableMenuButton(this.db),
+      this.tableCssMainProv.createTableCssMenu(this.db)]);
   }
 
-  public finDb(){
-    return this.db;
+  insertMenuButton(responseButtons: RespondButtonsRestInterface) {
+    return Promise.all([
+      this.tableMenuButtonProv.insertMenuButton(this.db, responseButtons)
+    ]).catch((error)=>{
+      console.log("error al insertar por -->" + error);
+    })
+  }
+
+  getAllMenuButtons() {
+    this.tableMenuButtonProv.getAllMenuButton().then((data) => {
+      console.log("imprimiendo data");
+      data.forEach((menu) => {
+        console.log(menu);
+      });
+    }).catch((error) => {
+      console.log("no se leen los datos   -->  " + error);
+    })
   }
 }

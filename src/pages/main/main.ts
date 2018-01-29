@@ -15,10 +15,8 @@ import {Page} from "ionic-angular/umd/navigation/nav-util";
 export class MainPage {
 
 
-  constructor(private platform: Platform,
-              public navCtrl: NavController,
-              public mainProvider: MainProvider,
-              public dbConectService: DbConnectProvider) {
+  constructor(public navCtrl: NavController,
+              public mainProvider: MainProvider) {
 
     Promise.resolve(mainProvider.conectForMenus()).then((data)=>{
      console.log(data);

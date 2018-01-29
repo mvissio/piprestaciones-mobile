@@ -6,5 +6,5 @@ export interface RespondButtonsRestInterface {
   Type: string;
   Order: number;
   Icon?: string;
-  CssModelMenu: CssResponseInterface;
+  CssModelMenu?: CssResponseInterface;
 }

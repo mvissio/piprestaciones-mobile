@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the AgendaPage page.
+ * Generated class for the PlanimetryPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,16 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-agenda',
-  templateUrl: 'agenda.html',
+  selector: 'page-planimetry',
+  templateUrl: 'planimetry.html',
 })
-export class AgendaPage {
+export class PlanimetryPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AgendaPage');
+    console.log('ionViewDidLoad PlanimetryPage');
   }
 
 }

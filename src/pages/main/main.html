@@ -10,19 +10,16 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <button text-center ion-button block *ngFor="let button of mainProvider.buttonList; let i = index"
+      <button ion-button icon-start block *ngFor="let button of mainProvider.buttonList; let i = index"
               (click)="changePage(button.Type)"
               [style.backgroundImage]="'url('+button.CssModelMenu.ImageBack+')'"
               [style.backgroundColor]="button.CssModelMenu.ColorBack"
               [style.color]="button.CssModelMenu.ColorText"
               [style.border]="button.CssModelMenu.BorderSize+'px solid #7480a2'">
-        <ion-icon icon-right name="{{button.Icon}}" >
-          {{button.TitleMenu}}
+        <ion-icon padding [style.color]="button.CssModelMenu.ColorIcon" name="{{button.Icon}}" >
         </ion-icon>
+        <div [innerHtml]="button.TitleMenu"></div>
       </button>
-    </ion-item>
-    <ion-item>
-      {{mainProvide}}
     </ion-item>
   </ion-list>
 </ion-content>

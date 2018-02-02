@@ -4,7 +4,7 @@ import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 
 import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
-import {MapPage, AgendaPage, StaticPage, MainPage, ProgramPage} from '../pages/index.paginas';
+import {MapPage, SpeackerListPage, SpeackerPage, StaticPage, MainPage, ProgramPage} from '../pages/index.paginas';
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
@@ -18,6 +18,7 @@ import {MapsProvider} from '../providers/maps/maps';
 import {HttpClientModule} from "@angular/common/http";
 import {StaticProvider} from '../providers/static/static';
 import {TableButtonMenuProvider,TableCssMainProvider} from "../providers/db-conect/db-tables/db-index.provider";
+import { SpeackerProvider } from '../providers/speacker/speacker';
 
 @NgModule({
   declarations: [
@@ -27,11 +28,14 @@ import {TableButtonMenuProvider,TableCssMainProvider} from "../providers/db-cone
     ProgramPage,
     MapPage,
     StaticPage,
-    AgendaPage
+    SpeackerListPage,
+    SpeackerPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      backButtonText: ' ',
+    }),
     HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDYQMf7FFP0S7pdPEl5Vq4uUq3b2gNbJ70'
@@ -45,7 +49,8 @@ import {TableButtonMenuProvider,TableCssMainProvider} from "../providers/db-cone
     ProgramPage,
     MapPage,
     StaticPage,
-    AgendaPage
+    SpeackerPage,
+    SpeackerListPage
   ],
   providers: [
     StatusBar,
@@ -60,7 +65,8 @@ import {TableButtonMenuProvider,TableCssMainProvider} from "../providers/db-cone
     ProgramProvider,
     ProgramProvider,
     MapsProvider,
-    StaticProvider
+    StaticProvider,
+    SpeackerProvider
   ]
 })
 export class AppModule {

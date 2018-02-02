@@ -3,5 +3,8 @@ page-static {
     p{
       background-color: $color;
     }
+    ion-card-header p{
+      text-align: center !important;
+    }
   }
 }

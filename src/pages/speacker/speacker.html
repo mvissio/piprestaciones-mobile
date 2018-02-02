@@ -1,0 +1,52 @@
+<!--
+  Generated template for the SpeakerPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>speaker</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="onClose()">
+        <ion-icon item-right name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+    <img [src]="speackerModel.imageUrl"/>
+    <ion-item>
+      <ion-avatar item-start>
+        <img [src]="speackerModel.nationalityUrl">
+      </ion-avatar>
+      <ion-card-title [innerHtml]="speackerModel.fullName">
+      </ion-card-title>
+    </ion-item>
+    <div *ngFor="let desc of speackerModel.description">
+      <div class="divisor" padding text-center="" [innerHtml]="desc"></div>
+    </div>
+  </ion-card>
+
+
+  <!--<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>-->
+  <!--<ion-list *ngFor="let contact of contactList" (click)="findStaticPage(contact.contactId)">-->
+  <!--<ion-item-sliding >-->
+  <!--<ion-item >-->
+  <!--<ion-avatar item-start>-->
+  <!--<img src="{{contact.image}}">-->
+  <!--</ion-avatar>-->
+  <!--<h2 [style.fontFamily]="contact.fontFamily">{{contact.fullname}}</h2>-->
+  <!--</ion-item>-->
+  <!--<ion-item-options side="right">-->
+  <!--<button ion-button icon-only color="primary" (click)="onMessage(contact.contactId)">-->
+  <!--<ion-icon name="text"></ion-icon>-->
+  <!--</button>-->
+  <!--</ion-item-options>-->
+  <!--</ion-item-sliding>-->
+  <!--</ion-list>-->
+</ion-content>

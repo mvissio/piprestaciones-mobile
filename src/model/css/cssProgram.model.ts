@@ -1,5 +1,9 @@
 export class CssProgramModel{
-
-  constructor() {
+  cssCalendarId:string;
+  class?:string;
+  icon?:string;
+  fontFamily?:string;
+  colorText?:string;
+  constructor(){
   }
 }

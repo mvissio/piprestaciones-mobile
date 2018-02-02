@@ -1,8 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {Content, IonicPage, NavController, NavParams} from 'ionic-angular';
-import {ProgramAreaModel} from "../../model/progam/programArea.model";
-import {ProgramaDateModel} from "../../model/progam/programaDate.model";
 import marked from 'marked';
+import {ProgramModel} from "../../model/progam/program.model";
+import {CssProgramModel} from "../../model/css/cssProgram.model";
 
 /**
  * Generated class for the ProgramPage page.
@@ -18,43 +18,44 @@ import marked from 'marked';
 })
 export class ProgramPage {
   @ViewChild(Content) content: Content;
-  colorText:string="#f2f2f2";
-  selectedFont:string;
-  programAreaList:ProgramAreaModel[]=[];
+  calendarList:ProgramModel[]=[];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    let program:ProgramAreaModel= new ProgramAreaModel();
-    let programHour1:ProgramaDateModel= new ProgramaDateModel();
-    let programHour2:ProgramaDateModel= new ProgramaDateModel();
-    program.title= marked("lunes");
-    program.order = 1;
-    programHour1.title= "test1";
-    programHour2.title= "test2";
-    program.programaDateList = [];
-    program.programaDateList.push(programHour1);
-    program.programaDateList.push(programHour2);
-    this.programAreaList.push(program);
-  }
-  pushProgram(programDate){
-    console.log(programDate);
-    this.navCtrl.push(ProgramPage);
+    this.setData();
   }
 
-
-
-
-  randomcolor = this.getRandomColor();
-
-  //function to get random colors
-  public getRandomColor() {
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '#';
-    for (var i = 0; i < 6; i++){
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
+  setData(){
+    let calendar:ProgramModel = new ProgramModel();
+    calendar.cssCalendar = new CssProgramModel();
+    this.selectType();
+    calendar.programID = "1";
+    calendar.title = "test";
+    calendar.type = "static";
+    calendar.order= 1;
+    calendar.cssCalendar.colorText = "red";
+    calendar.cssCalendar.fontFamily= "red";
+    calendar.cssCalendar.cssCalendarId= "1";
+    this.calendarList.push(calendar);
   }
 
-  setColor() {
-    this.randomcolor = this.getRandomColor();
+
+  selectType(){
+    this.calendarList.forEach(
+      (calendar)=>{
+        switch (calendar.type){
+          case "static":
+            calendar.cssCalendar.icon="arrow-forward";
+            calendar.cssCalendar.class="area-content";
+            break;
+          case "area":
+            calendar.cssCalendar.icon="add";
+            calendar.cssCalendar.class="area-content";
+            break;
+          case "dia":
+            calendar.cssCalendar.icon="add";
+            calendar.cssCalendar.class="day-content";
+            break;
+        }
+      }
+    )
   }
 }

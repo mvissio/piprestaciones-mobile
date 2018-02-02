@@ -17,13 +17,14 @@ import {StaticProvider} from "../../providers/static/static";
   templateUrl: 'static.html'
 })
 export class StaticPage {
-  staticModel: StaticModel= new StaticModel();
+  // staticModel: StaticModel= new StaticModel();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private staticProv:StaticProvider) {
-    this.findContent();
+  constructor(public navCtrl: NavController, public navParams: NavParams, public staticProv:StaticProvider) {
+
   }
 
   findContent(){
+
     // this.staticModel = this.staticProv.findContent(1);
     // this.staticModel=this.staticProv.findContent(1);
     // this.staticModel.titlePage= marked(this.staticModel.titlePage);

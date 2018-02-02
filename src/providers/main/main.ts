@@ -5,6 +5,7 @@ import {RespondButtonsRestInterface} from '../../interface/index.interface';
 import {TableCssMainProvider} from "../db-conect/db-tables/db-index.provider";
 import {Platform} from "ionic-angular";
 import {DbConnectProvider} from "../db-conect/db-connect.provider";
+import marked from 'marked';
 
 @Injectable()
 export class MainProvider {
@@ -24,10 +25,11 @@ export class MainProvider {
       .subscribe((dataList) => {
           dataList.forEach(
             (data) => {
+              data.TitleMenu = marked(data.TitleMenu);
               this.buttonList.push(data);
-              if (this.platform.is("cordova")) {
-                this.insertData(data);
-              }
+              // if (this.platform.is("cordova")) {
+              //   this.insertData(data);
+              // }
             }
           );
           console.log(dataList);
@@ -46,17 +48,5 @@ export class MainProvider {
     console.log("Datos insertando: " + data);
 
     this.dbConectService.getAllMenuButtons();
-    // console.log("Datos 1 insertado");
-    // // this.dbConectService.tableCssMainProv.insertCssMain(data.CssModelMenu);
-    // console.log("Datos Insertados: " + data)
   }
-
-  // dbConectService.tableCssMainProv.getCSsButtonById(mainProvider.buttonList[1].CssModelMenu.CssMenuId).then((data) => {
-
-  //   dbConectService.createTables().then((data)=>{
-  //     console.log("createTables finish");
-  //     // this.dbConectService.insertCssMenu(mainProvider.buttonList[1].CssModelMenu);
-  //   }).catch((error)=>{
-  //     console.log("createTables error")
-  //   });
 }

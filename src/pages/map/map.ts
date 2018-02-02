@@ -18,12 +18,11 @@ import {CoordsModel} from "../../model/maps/coords.model";
 export class MapPage {
   coords: CoordsModel;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private mapsProv: MapsProvider) {
-    this.loadMap();
+  constructor(public mapsProv: MapsProvider) {
+    Promise.resolve(this.mapsProv.conectForUbication()).then((data)=>{
+      console.log(data);
+    }).catch((error)=>{
+      console.log(error);
+    });
   }
-
-  loadMap() {
-    this.coords = this.mapsProv.findUbication();
-  }
-
 }

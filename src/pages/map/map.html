@@ -7,18 +7,37 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>map</ion-title>
+    <ion-title>Ubicacion</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-list >
+    <ion-item  *ngIf="mapsProv.mapList.length>0" >
+      <ion-card *ngFor="let map of mapsProv.mapList"
+                [style.border]="map.BorderSize+'px solid '+map.BorderColor">
+        <ion-card-header [innerHtml]="map.Title">
+        </ion-card-header>
+        <ion-card-content *ngIf="map.IsMap">
+          <agm-map  [latitude]="map.Lat" [longitude]="map.Lng" [zoom]="map.Zoom">
+            <agm-marker [latitude]="map.Lat" [longitude]="map.Lng" ></agm-marker>
+            <agm-info-window>
+              <strong>Ubicacion</strong>
+            </agm-info-window>
+          </agm-map>
+        </ion-card-content>
+        <ion-card-content *ngIf="!map.IsMap&&map.ImageList.length>0"  >
+          <div *ngFor="let image of map.ImageList">
+            <img padding src="{{image}}">
+          </div>
+        </ion-card-content>
+      </ion-card>
 
-  <agm-map [latitude]="coords.lat" [longitude]="coords.lng" [zoom]="coords.zoom">
-    <agm-marker [latitude]="coords.lat" [longitude]="coords.lng" ></agm-marker>
-    <agm-info-window>
-      <strong>InfoWindow content</strong>
-    </agm-info-window>
-  </agm-map>
+    </ion-item>
+
+
+  </ion-list>
+
 </ion-content>

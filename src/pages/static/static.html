@@ -1,39 +1,45 @@
 <ion-header>
 
   <ion-navbar color="red" >
-    <!--<ion-title [innerHTML]="staticModel.titlePage" [style.color]="staticModel.cssModel.colorText"></ion-title>-->
-    <ion-title > {{staticModel.titlePage}}</ion-title>
+    <ion-title [innerHTML]="staticProv.staticPage.PageTitle" [style.color]="staticProv.staticPage.CssStaticPage.BackGroundColor"></ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content color="primary" color="">
-  <div *ngFor="let modelContent of staticModel.staticContentList" >
-    <ion-card *ngIf="modelContent.type=='title' "
-                     [style.color]="modelContent.cssStatic.colorText"
-                     [style.background-color]="modelContent.cssStatic.colorBack">
-      <ion-card-header [innerHTML]="modelContent.text"></ion-card-header>
-    </ion-card>
-    <p *ngIf="modelContent.type=='title' "
-       [innerHTML]="modelContent.text"
-       [style.color]="modelContent.cssStatic.colorBack"
-       [style.background-color]="modelContent.cssStatic.colorText"></p>
-    <p *ngIf="modelContent.type=='subtitle' "
-       [innerHTML]="modelContent.text"
-       [style.color]="modelContent.cssStatic.colorBack"
-       [style.background-color]="modelContent.cssStatic.colorText"></p>
-    <p *ngIf="modelContent.type=='text' "
-       [innerHTML]="modelContent.text"
-       [style.color]="modelContent.cssStatic.colorBack"
-       [style.background-color]="modelContent.cssStatic.colorText"></p>
-    <p *ngIf="modelContent.type=='image' "
-       [innerHTML]="modelContent.text"
-       [style.color]="modelContent.cssStatic.colorBack"
-       [style.background-color]="modelContent.cssStatic.colorText"></p>
-    <p *ngIf="modelContent.type=='test-image' "
-       [innerHTML]="modelContent.text"
-       [style.color]="modelContent.cssStatic.colorBack"
-       [style.background-color]="modelContent.cssStatic.colorText"></p>
-  </div>
+<ion-content color="primary">
+  <ion-list *ngFor="let content of staticProv.staticPage.StaticContentList">
+    <ion-card *ngIf="content.StaticContentType=='title' "
+              block
+              text-center
+              [style.color]="content.cssStaticContent.ColorText"
+              [style.background-color]="content.cssStaticContent.ColorBack">
+      <ion-card-header [innerHTML]="content.StaticContentText"></ion-card-header>
+      <div> </div>
+      </ion-card>
+
+  </ion-list>
+  <!--<div *ngFor="let modelContent of staticModel.staticContentList" >-->
+    <!--
+    <!--<p *ngIf="modelContent.type=='title' "-->
+       <!--[innerHTML]="modelContent.text"-->
+       <!--[style.color]="modelContent.cssStatic.colorBack"-->
+       <!--[style.background-color]="modelContent.cssStatic.colorText"></p>-->
+    <!--<p *ngIf="modelContent.type=='subtitle' "-->
+       <!--[innerHTML]="modelContent.text"-->
+       <!--[style.color]="modelContent.cssStatic.colorBack"-->
+       <!--[style.background-color]="modelContent.cssStatic.colorText"></p>-->
+    <!--<p *ngIf="modelContent.type=='text' "-->
+       <!--[innerHTML]="modelContent.text"-->
+       <!--[style.color]="modelContent.cssStatic.colorBack"-->
+       <!--[style.background-color]="modelContent.cssStatic.colorText"></p>-->
+    <!--<p *ngIf="modelContent.type=='image' "-->
+       <!--[innerHTML]="modelContent.text"-->
+       <!--[style.color]="modelContent.cssStatic.colorBack"-->
+       <!--[style.background-color]="modelContent.cssStatic.colorText"></p>-->
+    <!--<p *ngIf="modelContent.type=='test-image' "-->
+       <!--[innerHTML]="modelContent.text"-->
+       <!--[style.color]="modelContent.cssStatic.colorBack"-->
+       <!--[style.background-color]="modelContent.cssStatic.colorText"></p>-->
+  <!--</div>-->
 </ion-content>

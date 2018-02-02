@@ -2,9 +2,10 @@ import {Component} from '@angular/core';
 import {IonicPage, NavController, Platform} from 'ionic-angular';
 import {DbConnectProvider} from "../../providers/db-conect/db-connect.provider";
 import {MenuOptionsModel} from "../../model/menuOptions.model";
-import {AgendaPage, ProgramPage, MapPage, StaticPage} from "../index.paginas";
+import {SpeackerPage, ProgramPage, MapPage, StaticPage} from "../index.paginas";
 import {MainProvider} from "../../providers/main/main";
 import {Page} from "ionic-angular/umd/navigation/nav-util";
+import {SpeackerListPage} from "../speacker-list/speacker-list";
 
 
 @IonicPage()
@@ -14,7 +15,6 @@ import {Page} from "ionic-angular/umd/navigation/nav-util";
 })
 export class MainPage {
 
-
   constructor(public navCtrl: NavController,
               public mainProvider: MainProvider) {
 
@@ -23,8 +23,6 @@ export class MainPage {
     }).catch((error)=>{
       console.log(error);
     });
-
-
   }
 
   changePage(type: string) {
@@ -33,11 +31,11 @@ export class MainPage {
       case "programa":
         pageSelect = ProgramPage;
         break;
-      case "maps":
+      case "mapa":
         pageSelect = MapPage;
         break;
-      case "agenda":
-        pageSelect = AgendaPage;
+      case "disertantes":
+        pageSelect = SpeackerListPage;
         break;
       default:
         pageSelect = StaticPage;
